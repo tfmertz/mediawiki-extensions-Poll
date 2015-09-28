@@ -79,6 +79,7 @@ function efPollSchemaUpdates( $updater = null ) {
 		if ( $wgDBtype == 'mysql' ) {
 			// "poll"-Table: All infomation about the polls
 			$wgExtNewTables[] = array( 'poll', "$base/archives/Poll.sql" ); // Initial install tables
+			$wgExtNewFields[] = array( 'poll', 'moreoptions', "$base/archives/patch-more-options.sql" ); // Add 6 more options
 			$wgExtNewFields[] = array( 'poll', 'creater', "$base/archives/patch-creater.sql" ); // Add creater
 			$wgExtNewFields[] = array( 'poll', 'dis', "$base/archives/patch-dis.sql" ); // Add dis
 			$wgExtNewFields[] = array( 'poll', 'multi', "$base/archives/patch-multi.sql" ); // Add multi
