@@ -100,6 +100,7 @@ function efPollSchemaUpdates( $updater = null ) {
 		if ( $updater->getDB()->getType() == 'mysql' ) {
 			// "poll"-Table: All infomation about the polls
 			$updater->addExtensionUpdate( array( 'addTable', 'poll', "$base/archives/Poll.sql", true ) ); // Initial install tables
+			$updater->addExtensionUpdate( array( 'addField', 'poll', 'moreoptions', "$base/archives/patch-more-options.sql", true ) ); // Add 6 more options for Poll
 			$updater->addExtensionUpdate( array( 'addField', 'poll', 'creater', "$base/archives/patch-creater.sql", true ) ); // Add creater
 			$updater->addExtensionUpdate( array( 'addField', 'poll', 'dis', "$base/archives/patch-dis.sql", true ) ); // Add dis
 			$updater->addExtensionUpdate( array( 'addField', 'poll', 'multi', "$base/archives/patch-multi.sql", true ) ); // Add multi

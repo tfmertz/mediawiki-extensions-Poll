@@ -211,6 +211,12 @@ class Poll extends SpecialPage {
 			$formFields['poll-option4'] = Xml::input( 'poll_alternative_4' );
 			$formFields['poll-option5'] = Xml::input( 'poll_alternative_5' );
 			$formFields['poll-option6'] = Xml::input( 'poll_alternative_6' );
+			$formFields['poll-option7'] = Xml::input( 'poll_alternative_7' );
+			$formFields['poll-option8'] = Xml::input( 'poll_alternative_8' );
+			$formFields['poll-option9'] = Xml::input( 'poll_alternative_9' );
+			$formFields['poll-option10'] = Xml::input( 'poll_alternative_10' );
+			$formFields['poll-option11'] = Xml::input( 'poll_alternative_11' );
+			$formFields['poll-option12'] = Xml::input( 'poll_alternative_12' );
 			$formFields['poll-dis'] = Xml::textarea( 'dis', '' );
 			$formFields['poll-runtime'] = $runtimeSelect->getHTML();
 			$formFields['poll-create-allow-more'] = Xml::check( 'allow_more' );
@@ -237,7 +243,7 @@ class Poll extends SpecialPage {
 		}
 		else {
 			$dbr = wfGetDB( DB_SLAVE );
-			$query = $dbr->select( 'poll', 'question, alternative_1, alternative_2, alternative_3, alternative_4, alternative_5, alternative_6, creater, multi',
+			$query = $dbr->select( 'poll', 'question, alternative_1, alternative_2, alternative_3, alternative_4, alternative_5, alternative_6, alternative_7, alternative_8, alternative_9, alternative_10, alternative_11, alternative_12, creater, multi',
 				array( 'id' => $vid ), __METHOD__ );
 
 			while ( $row = $dbr->fetchObject( $query ) ) {
@@ -248,6 +254,12 @@ class Poll extends SpecialPage {
 				$alternative_4 = htmlentities( $row->alternative_4, ENT_QUOTES, 'UTF-8'  );
 				$alternative_5 = htmlentities( $row->alternative_5, ENT_QUOTES, 'UTF-8'  );
 				$alternative_6 = htmlentities( $row->alternative_6, ENT_QUOTES, 'UTF-8'  );
+				$alternative_7 = htmlentities( $row->alternative_7, ENT_QUOTES, 'UTF-8'  );
+				$alternative_8 = htmlentities( $row->alternative_8, ENT_QUOTES, 'UTF-8'  );
+				$alternative_9 = htmlentities( $row->alternative_9, ENT_QUOTES, 'UTF-8'  );
+				$alternative_10 = htmlentities( $row->alternative_10, ENT_QUOTES, 'UTF-8'  );
+				$alternative_11 = htmlentities( $row->alternative_11, ENT_QUOTES, 'UTF-8'  );
+				$alternative_12 = htmlentities( $row->alternative_12, ENT_QUOTES, 'UTF-8'  );
 				$creater = htmlentities( $row->creater, ENT_QUOTES, 'UTF-8'  );
 				$multi = $row->multi;
 			}
@@ -273,6 +285,12 @@ class Poll extends SpecialPage {
 				if ( $alternative_4 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_4, 'vote', '4', 'vote4' ) ); }
 				if ( $alternative_5 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_5, 'vote', '5', 'vote5' ) ); }
 				if ( $alternative_6 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_6, 'vote', '6', 'vote6' ) ); }
+				if ( $alternative_7 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_7, 'vote', '7', 'vote7' ) ); }
+				if ( $alternative_8 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_8, 'vote', '8', 'vote8' ) ); }
+				if ( $alternative_9 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_9, 'vote', '9', 'vote9' ) ); }
+				if ( $alternative_10 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_10, 'vote', '10', 'vote10' ) ); }
+				if ( $alternative_11 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_11, 'vote', '11', 'vote11' ) ); }
+				if ( $alternative_12 != "" ) { $tableRows[] = array( Xml::radioLabel( $alternative_12, 'vote', '12', 'vote12' ) ); }
 				$tableRows[] = array( Xml::inputLabel( wfMessage( 'poll-vote-other' )->escaped(), 'vote_other', 'vote_other' ) );
 			}
 			if ( $multi == 1 ) {
@@ -282,6 +300,13 @@ class Poll extends SpecialPage {
 				if ( $alternative_4 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_4, 'vote_4', 'vote_4' ) ); }
 				if ( $alternative_5 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_5, 'vote_5', 'vote_5' ) ); }
 				if ( $alternative_6 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_6, 'vote_6', 'vote_6' ) ); }
+				if ( $alternative_7 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_7, 'vote_7', 'vote7' ) ); }
+				if ( $alternative_8 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_8, 'vote_8', 'vote8' ) ); }
+				if ( $alternative_9 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_9, 'vote_9', 'vote9' ) ); }
+				if ( $alternative_10 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_10, 'vote_10', 'vote10' ) ); }
+				if ( $alternative_11 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_11, 'vote_11', 'vote11' ) ); }
+				if ( $alternative_12 != "" ) { $tableRows[] = array( Xml::checkLabel( $alternative_12, 'vote_12', 'vote12' ) ); }
+
 				$tableRows[] = array( Xml::inputLabel( wfMessage( 'poll-vote-other' )->escaped(), 'vote_other', 'vote_other' ) );
 			}
 
@@ -319,7 +344,7 @@ class Poll extends SpecialPage {
 		}
 		else {
 			$dbr = wfGetDB( DB_SLAVE );
-			$query = $dbr->select( 'poll', 'question, alternative_1, alternative_2, alternative_3, alternative_4, alternative_5, alternative_6, creater, multi',
+			$query = $dbr->select( 'poll', 'question, alternative_1, alternative_2, alternative_3, alternative_4, alternative_5, alternative_6, alternative_7, alternative_8, alternative_9, alternative_10, alternative_11, alternative_12, creater, multi',
 				array( 'id' => $sid ), __METHOD__ );
 
 			while ( $row = $dbr->fetchObject( $query ) ) {
@@ -330,6 +355,12 @@ class Poll extends SpecialPage {
 				$alternative_4 = htmlentities( $row->alternative_4, ENT_QUOTES, 'UTF-8'  );
 				$alternative_5 = htmlentities( $row->alternative_5, ENT_QUOTES, 'UTF-8'  );
 				$alternative_6 = htmlentities( $row->alternative_6, ENT_QUOTES, 'UTF-8'  );
+				$alternative_7 = htmlentities( $row->alternative_7, ENT_QUOTES, 'UTF-8'  );
+				$alternative_8 = htmlentities( $row->alternative_8, ENT_QUOTES, 'UTF-8'  );
+				$alternative_9 = htmlentities( $row->alternative_9, ENT_QUOTES, 'UTF-8'  );
+				$alternative_10 = htmlentities( $row->alternative_10, ENT_QUOTES, 'UTF-8'  );
+				$alternative_11 = htmlentities( $row->alternative_11, ENT_QUOTES, 'UTF-8'  );
+				$alternative_12 = htmlentities( $row->alternative_12, ENT_QUOTES, 'UTF-8'  );
 				$creater = htmlentities( $row->creater, ENT_QUOTES, 'UTF-8'  );
 				$multi = $row->multi;
 			}
@@ -348,6 +379,12 @@ class Poll extends SpecialPage {
 				$query_4 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '4', 'pid' => $sid ), __METHOD__ );
 				$query_5 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '5', 'pid' => $sid ), __METHOD__ );
 				$query_6 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '6', 'pid' => $sid ), __METHOD__ );
+				$query_7 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '7', 'pid' => $sid ), __METHOD__ );
+				$query_8 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '8', 'pid' => $sid ), __METHOD__ );
+				$query_9 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '9', 'pid' => $sid ), __METHOD__ );
+				$query_10 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '10', 'pid' => $sid ), __METHOD__ );
+				$query_11 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '11', 'pid' => $sid ), __METHOD__ );
+				$query_12 = $dbr->select( 'poll_answer', 'uid', array( 'vote' => '12', 'pid' => $sid ), __METHOD__ );
 
 				$query_num_1 = $dbr->numRows( $query_1 );
 				$query_num_2 = $dbr->numRows( $query_2 );
@@ -355,6 +392,12 @@ class Poll extends SpecialPage {
 				$query_num_4 = $dbr->numRows( $query_4 );
 				$query_num_5 = $dbr->numRows( $query_5 );
 				$query_num_6 = $dbr->numRows( $query_6 );
+				$query_num_7 = $dbr->numRows( $query_7 );
+				$query_num_8 = $dbr->numRows( $query_8 );
+				$query_num_9 = $dbr->numRows( $query_9 );
+				$query_num_10 = $dbr->numRows( $query_10 );
+				$query_num_11 = $dbr->numRows( $query_11 );
+				$query_num_12 = $dbr->numRows( $query_12 );
 			}
 
 			if ( $multi == 1 ) {
@@ -364,6 +407,12 @@ class Poll extends SpecialPage {
 				$query_num_4 = 0;
 				$query_num_5 = 0;
 				$query_num_6 = 0;
+				$query_num_7 = 0;
+				$query_num_8 = 0;
+				$query_num_9 = 0;
+				$query_num_10 = 0;
+				$query_num_11 = 0;
+				$query_num_12 = 0;
 
 				$query_multi = $dbr->select( 'poll_answer', 'vote', array( 'pid' => $sid ), __METHOD__ );
 				while ( $row = $dbr->fetchObject( $query_multi ) ) {
@@ -376,6 +425,12 @@ class Poll extends SpecialPage {
 					if ( $vote[3] == "1" ) { $query_num_4++; }
 					if ( $vote[4] == "1" ) { $query_num_5++; }
 					if ( $vote[5] == "1" ) { $query_num_6++; }
+					if ( $vote[6] == "1" ) { $query_num_7++; }
+					if ( $vote[7] == "1" ) { $query_num_8++; }
+					if ( $vote[8] == "1" ) { $query_num_9++; }
+					if ( $vote[9] == "1" ) { $query_num_10++; }
+					if ( $vote[10] == "1" ) { $query_num_11++; }
+					if ( $vote[11] == "1" ) { $query_num_12++; }
 				}
 			}
 
@@ -401,6 +456,12 @@ class Poll extends SpecialPage {
 			if ( $alternative_4 != "" ) { $tableRows[] = array( $alternative_4, $query_num_4 ); }
 			if ( $alternative_5 != "" ) { $tableRows[] = array( $alternative_5, $query_num_5 ); }
 			if ( $alternative_6 != "" ) { $tableRows[] = array( $alternative_6, $query_num_6 ); }
+			if ( $alternative_7 != "" ) { $tableRows[] = array( $alternative_7, $query_num_7 ); }
+			if ( $alternative_8 != "" ) { $tableRows[] = array( $alternative_8, $query_num_8 ); }
+			if ( $alternative_9 != "" ) { $tableRows[] = array( $alternative_9, $query_num_9 ); }
+			if ( $alternative_10 != "" ) { $tableRows[] = array( $alternative_10, $query_num_10 ); }
+			if ( $alternative_11 != "" ) { $tableRows[] = array( $alternative_11, $query_num_11 ); }
+			if ( $alternative_12 != "" ) { $tableRows[] = array( $alternative_12, $query_num_12 ); }
 
 			foreach ( $score_other as $name => $value ) {
 				$tableRows[] = array( htmlentities( $name, ENT_QUOTES, 'UTF-8' ), htmlentities( $value['number'], ENT_QUOTES, 'UTF-8' ) );
@@ -413,7 +474,7 @@ class Poll extends SpecialPage {
 		}
 	}
 
-	// This function create a interfache for deleting polls
+	// This function creates an interface for deleting polls
 	public function delete( $did ) {
 		$output = $this->getOutput();
 
@@ -440,14 +501,14 @@ class Poll extends SpecialPage {
 		}
 	}
 
-	// This function create a interfache for changing polls
+	// This function creates an interface for changing polls
 	public function change( $cid ) {
 		$output = $this->getOutput();
 
 		$output->setPagetitle( wfMessage( 'poll-title-change' )->text() );
 
 		$dbr = wfGetDB( DB_SLAVE );
-		$query = $dbr->select( 'poll', 'question, alternative_1, alternative_2, alternative_3, alternative_4, alternative_5, alternative_6, creater, dis',
+		$query = $dbr->select( 'poll', 'question, alternative_1, alternative_2, alternative_3, alternative_4, alternative_5, alternative_6, alternative_7, alternative_8, alternative_9, alternative_10, alternative_11, alternative_12, creater, multi',
 			array( 'id' => $cid ), __METHOD__ );
 
 		while ( $row = $dbr->fetchObject( $query ) ) {
@@ -458,6 +519,12 @@ class Poll extends SpecialPage {
 			$alternative_4 = htmlentities( $row->alternative_4, ENT_QUOTES, 'UTF-8' );
 			$alternative_5 = htmlentities( $row->alternative_5, ENT_QUOTES, 'UTF-8' );
 			$alternative_6 = htmlentities( $row->alternative_6, ENT_QUOTES, 'UTF-8' );
+			$alternative_7 = htmlentities( $row->alternative_7, ENT_QUOTES, 'UTF-8'  );
+			$alternative_8 = htmlentities( $row->alternative_8, ENT_QUOTES, 'UTF-8'  );
+			$alternative_9 = htmlentities( $row->alternative_9, ENT_QUOTES, 'UTF-8'  );
+			$alternative_10 = htmlentities( $row->alternative_10, ENT_QUOTES, 'UTF-8'  );
+			$alternative_11 = htmlentities( $row->alternative_11, ENT_QUOTES, 'UTF-8'  );
+			$alternative_12 = htmlentities( $row->alternative_12, ENT_QUOTES, 'UTF-8'  );
 			$creater = htmlentities( $row->creater, ENT_QUOTES, 'UTF-8' );
 			$dis = htmlentities( $row->dis, ENT_QUOTES, 'UTF-8' );
 		}
@@ -479,6 +546,12 @@ class Poll extends SpecialPage {
 			$formFields['poll-option4'] = Xml::input( 'poll_alternative_4', false, $alternative_4 );
 			$formFields['poll-option5'] = Xml::input( 'poll_alternative_5', false, $alternative_5 );
 			$formFields['poll-option6'] = Xml::input( 'poll_alternative_6', false, $alternative_6 );
+			$formFields['poll-option7'] = Xml::input( 'poll_alternative_7', false, $alternative_7 );
+			$formFields['poll-option8'] = Xml::input( 'poll_alternative_8', false, $alternative_8 );
+			$formFields['poll-option9'] = Xml::input( 'poll_alternative_9', false, $alternative_9 );
+			$formFields['poll-option10'] = Xml::input( 'poll_alternative_10', false, $alternative_10 );
+			$formFields['poll-option11'] = Xml::input( 'poll_alternative_11', false, $alternative_11 );
+			$formFields['poll-option12'] = Xml::input( 'poll_alternative_12', false, $alternative_12 );
 			$formFields['poll-dis'] = Xml::textarea( 'dis', $dis );
 
 			$output->addHtml( Xml::buildForm( $formFields, 'poll-submit' ) );
@@ -487,7 +560,7 @@ class Poll extends SpecialPage {
 		}
 	}
 
-	// This fucntion execute the order of the other function
+	// This function executes the order of the other functions
 	public function submit( $pid ) {
 		$requestObject = $this->getRequest();
 		$userObject = $this->getUser();
@@ -524,6 +597,24 @@ class Poll extends SpecialPage {
 				$alternative_6 = ( $requestObject->getVal( 'poll_alternative_6' ) != "" ) ? $requestObject->getVal( 'poll_alternative_6' ) : "";
 				$alternative_6 = preg_replace( "#\[\[#", "", $alternative_6 );
 				$alternative_6 = preg_replace( "#\]\]#", "", $alternative_6 );
+				$alternative_7 = ( $requestObject->getVal( 'poll_alternative_7' ) != "" ) ? $requestObject->getVal( 'poll_alternative_7' ) : "";
+				$alternative_7 = preg_replace( "#\[\[#", "", $alternative_7 );
+				$alternative_7 = preg_replace( "#\]\]#", "", $alternative_7 );
+				$alternative_8 = ( $requestObject->getVal( 'poll_alternative_8' ) != "" ) ? $requestObject->getVal( 'poll_alternative_8' ) : "";
+				$alternative_8 = preg_replace( "#\[\[#", "", $alternative_8 );
+				$alternative_8 = preg_replace( "#\]\]#", "", $alternative_8 );
+				$alternative_9 = ( $requestObject->getVal( 'poll_alternative_9' ) != "" ) ? $requestObject->getVal( 'poll_alternative_9' ) : "";
+				$alternative_9 = preg_replace( "#\[\[#", "", $alternative_9 );
+				$alternative_9 = preg_replace( "#\]\]#", "", $alternative_9 );
+				$alternative_10 = ( $requestObject->getVal( 'poll_alternative_10' ) != "" ) ? $requestObject->getVal( 'poll_alternative_10' ) : "";
+				$alternative_10 = preg_replace( "#\[\[#", "", $alternative_10 );
+				$alternative_10 = preg_replace( "#\]\]#", "", $alternative_10 );
+				$alternative_11 = ( $requestObject->getVal( 'poll_alternative_11' ) != "" ) ? $requestObject->getVal( 'poll_alternative_11' ) : "";
+				$alternative_11 = preg_replace( "#\[\[#", "", $alternative_11 );
+				$alternative_11 = preg_replace( "#\]\]#", "", $alternative_11 );
+				$alternative_12 = ( $requestObject->getVal( 'poll_alternative_12' ) != "" ) ? $requestObject->getVal( 'poll_alternative_12' ) : "";
+				$alternative_12 = preg_replace( "#\[\[#", "", $alternative_12 );
+				$alternative_12 = preg_replace( "#\]\]#", "", $alternative_12 );
 				$dis = ( $requestObject->getVal( 'dis' ) != "" ) ? $requestObject->getVal( 'dis' ) : wfMsg( 'poll-no-dis' );
 				$multi = ( $requestObject->getVal( 'allow_more' ) == 1 ) ? 1 : 0;
 				$user = $userObject->getName();
@@ -533,7 +624,9 @@ class Poll extends SpecialPage {
 				if ( $question != "" && $alternative_1 != "" && $alternative_2 != "" ) {
 					$dbw->insert( 'poll', array( 'question' => $question, 'alternative_1' => $alternative_1, 'alternative_2' => $alternative_2,
 						'alternative_3' => $alternative_3, 'alternative_4' => $alternative_4, 'alternative_5' => $alternative_5,
-						'alternative_6' => $alternative_6, 'creater' => $user, 'dis' => $dis, 'multi' => $multi, 'ip' => $ip,
+						'alternative_6' => $alternative_6, 'alternative_7' => $alternative_7, 'alternative_8' => $alternative_8,
+						'alternative_9' => $alternative_9, 'alternative_10' => $alternative_10, 'alternative_11' => $alternative_11, 'alternative_12' => $alternative_12,
+						'creater' => $user, 'dis' => $dis, 'multi' => $multi, 'ip' => $ip,
 						'starttime' => time(), 'runtime' => $runtime ), __METHOD__ );
 
 					$log = new LogPage( "poll" );
@@ -601,6 +694,12 @@ class Poll extends SpecialPage {
 					$vote_4 = $requestObject->getVal( 'vote_4' );
 					$vote_5 = $requestObject->getVal( 'vote_5' );
 					$vote_6 = $requestObject->getVal( 'vote_6' );
+					$vote_7 = $requestObject->getVal( 'vote_7' );
+					$vote_8 = $requestObject->getVal( 'vote_8' );
+					$vote_9 = $requestObject->getVal( 'vote_9' );
+					$vote_10 = $requestObject->getVal( 'vote_10' );
+					$vote_11 = $requestObject->getVal( 'vote_11' );
+					$vote_12 = $requestObject->getVal( 'vote_12' );
 					$vote_other = ( $requestObject->getVal( 'vote_other' ) != "" ) ? $requestObject->getVal( 'vote_other' ) : "";
 
 					$vote = "";
@@ -609,9 +708,15 @@ class Poll extends SpecialPage {
 					$vote .= ( $vote_3 == 1 ) ? "1|" : "0|";
 					$vote .= ( $vote_4 == 1 ) ? "1|" : "0|";
 					$vote .= ( $vote_5 == 1 ) ? "1|" : "0|";
-					$vote .= ( $vote_6 == 1 ) ? "1" : "0";
+					$vote .= ( $vote_6 == 1 ) ? "1|" : "0|";
+					$vote .= ( $vote_7 == 1 ) ? "1|" : "0|";
+					$vote .= ( $vote_8 == 1 ) ? "1|" : "0|";
+					$vote .= ( $vote_9 == 1 ) ? "1|" : "0|";
+					$vote .= ( $vote_10 == 1 ) ? "1|" : "0|";
+					$vote .= ( $vote_11 == 1 ) ? "1|" : "0|";
+					$vote .= ( $vote_12 == 1 ) ? "1" : "0";
 
-					if ( $vote == "0|0|0|0|0|0" AND $vote_other == "" ) {
+					if ( $vote == "0|0|0|0|0|0|0|0|0|0|0|0" AND $vote_other == "" ) {
 						$vote = "err001";
 					}
 				}
@@ -696,12 +801,32 @@ class Poll extends SpecialPage {
 				$alternative_6 = ( $requestObject->getVal( 'poll_alternative_6' ) != "" ) ? $requestObject->getVal( 'poll_alternative_6' ) : "";
 				$alternative_6 = preg_replace( "#\[\[#", "", $alternative_6 );
 				$alternative_6 = preg_replace( "#\]\]#", "", $alternative_6 );
+				$alternative_7 = ( $requestObject->getVal( 'poll_alternative_7' ) != "" ) ? $requestObject->getVal( 'poll_alternative_7' ) : "";
+				$alternative_7 = preg_replace( "#\[\[#", "", $alternative_7 );
+				$alternative_7 = preg_replace( "#\]\]#", "", $alternative_7 );
+				$alternative_8 = ( $requestObject->getVal( 'poll_alternative_8' ) != "" ) ? $requestObject->getVal( 'poll_alternative_8' ) : "";
+				$alternative_8 = preg_replace( "#\[\[#", "", $alternative_8 );
+				$alternative_8 = preg_replace( "#\]\]#", "", $alternative_8 );
+				$alternative_9 = ( $requestObject->getVal( 'poll_alternative_9' ) != "" ) ? $requestObject->getVal( 'poll_alternative_9' ) : "";
+				$alternative_9 = preg_replace( "#\[\[#", "", $alternative_9 );
+				$alternative_9 = preg_replace( "#\]\]#", "", $alternative_9 );
+				$alternative_10 = ( $requestObject->getVal( 'poll_alternative_10' ) != "" ) ? $requestObject->getVal( 'poll_alternative_10' ) : "";
+				$alternative_10 = preg_replace( "#\[\[#", "", $alternative_10 );
+				$alternative_10 = preg_replace( "#\]\]#", "", $alternative_10 );
+				$alternative_11 = ( $requestObject->getVal( 'poll_alternative_11' ) != "" ) ? $requestObject->getVal( 'poll_alternative_11' ) : "";
+				$alternative_11 = preg_replace( "#\[\[#", "", $alternative_11 );
+				$alternative_11 = preg_replace( "#\]\]#", "", $alternative_11 );
+				$alternative_12 = ( $requestObject->getVal( 'poll_alternative_12' ) != "" ) ? $requestObject->getVal( 'poll_alternative_12' ) : "";
+				$alternative_12 = preg_replace( "#\[\[#", "", $alternative_12 );
+				$alternative_12 = preg_replace( "#\]\]#", "", $alternative_12 );
 				$dis = ( $requestObject->getVal( 'dis' ) != "" ) ? $requestObject->getVal( 'dis' ) : wfMsg( 'poll-no-dis' );
 				$user = $userObject->getName();
 
 				$dbw->update( 'poll', array( 'question' => $question, 'alternative_1' => $alternative_1, 'alternative_2' => $alternative_2,
 					'alternative_3' => $alternative_3, 'alternative_4' => $alternative_4, 'alternative_5' => $alternative_5,
-					'alternative_6' => $alternative_6, 'creater' => $user, 'dis' => $dis ), array( 'id' => $pid ) );
+					'alternative_6' => $alternative_6, 'alternative_7' => $alternative_7, 'alternative_8' => $alternative_8,
+					'alternative_9' => $alternative_9, 'alternative_10' => $alternative_10, 'alternative_11' => $alternative_11, 'alternative_12' => $alternative_12,
+					'creater' => $user, 'dis' => $dis ), array( 'id' => $pid ) );
 
 				$log = new LogPage( "poll" );
 				$title = $this->getPageTitle();

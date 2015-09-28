@@ -11,5 +11,11 @@ CREATE TABLE /*$wgDBprefix*/poll (
 `alternative_3` VARCHAR( 255 ) NOT NULL ,
 `alternative_4` VARCHAR( 255 ) NOT NULL ,
 `alternative_5` VARCHAR( 255 ) NOT NULL ,
-`alternative_6` VARCHAR( 255 ) NOT NULL
+`alternative_6` VARCHAR( 255 ) NOT NULL,
+`alternative_7` VARCHAR( 255 ) NOT NULL,
+`alternative_8` VARCHAR( 255 ) NOT NULL,
+`alternative_9` VARCHAR( 255 ) NOT NULL,
+`alternative_10` VARCHAR( 255 ) NOT NULL,
+`alternative_11` VARCHAR( 255 ) NOT NULL,
+`alternative_12` VARCHAR( 255 ) NOT NULL
 ) /*$wgDBTableOptions*/;
